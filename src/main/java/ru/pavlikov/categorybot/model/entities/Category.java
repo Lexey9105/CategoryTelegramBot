@@ -7,7 +7,9 @@ import lombok.Setter;
 
 import java.util.List;
 
-
+/**
+ * @author pavlikov
+ */
 @Getter
 @Setter
 @NoArgsConstructor

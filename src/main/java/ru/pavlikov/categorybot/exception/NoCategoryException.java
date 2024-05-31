@@ -1,5 +1,7 @@
 package ru.pavlikov.categorybot.exception;
-
+/**
+ * @author pavlikov
+ */
 public class NoCategoryException extends RuntimeException {
 
     public NoCategoryException(){

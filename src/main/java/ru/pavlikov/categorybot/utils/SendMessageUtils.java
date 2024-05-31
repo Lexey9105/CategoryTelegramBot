@@ -10,6 +10,10 @@ import ru.pavlikov.categorybot.bot.TelegramBotImpl;
 
 import java.io.File;
 
+/**
+ * Воспомогательный класс для отправки сообщений и фалов в чат
+ * @author pavlikov
+ */
 @RequiredArgsConstructor
 @Component
 public class SendMessageUtils {

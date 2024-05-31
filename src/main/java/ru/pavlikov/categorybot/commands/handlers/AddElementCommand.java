@@ -1,26 +1,27 @@
-package ru.pavlikov.categorybot.commands.executors;
+package ru.pavlikov.categorybot.commands.handlers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import ru.pavlikov.categorybot.exception.NoCategoryException;
 import ru.pavlikov.categorybot.model.Command;
 import ru.pavlikov.categorybot.service.impl.CategoryService;
 import ru.pavlikov.categorybot.utils.SendMessageUtils;
-
+/**
+ * @author pavlikov
+ */
 @Component
 @RequiredArgsConstructor
-public class AddElementCommand  implements CommandExecutor {
+public class AddElementCommand  implements CommandHandler {
 
     private final SendMessageUtils sendMessageUtils;
     private final CategoryService categoryService;
 
+    /**
+     * Принимает {@link Command} и исполняет команду /addElement
+     * @param command - команда с аргументами
+     */
     @Override
     public void execute(Command command)  {
-        if (command.getParentCategory().equals("null")) {
-            throw new NoCategoryException();
-        }
-
         if (command.getChildrenCategory().equals("null")) {
             try {
                 categoryService.saveRootCategory(command);

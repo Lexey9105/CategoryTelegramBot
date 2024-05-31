@@ -3,15 +3,13 @@ package ru.pavlikov.categorybot.bot;
 import lombok.RequiredArgsConstructor;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.stickers.UploadStickerFile;
-import org.telegram.telegrambots.meta.api.objects.File;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import ru.pavlikov.categorybot.commands.CommandManager;
-import ru.pavlikov.categorybot.utils.SendMessageUtils;
+import ru.pavlikov.categorybot.commands.CommandManagerImpl;
 
 import java.util.function.Consumer;
-
+/**
+ * @author pavlikov
+ */
 @RequiredArgsConstructor
 public class TelegramBotImpl extends TelegramLongPollingBot {
 
@@ -26,6 +24,11 @@ public class TelegramBotImpl extends TelegramLongPollingBot {
         updateAction = updateHandler;
     }
 
+    /**
+     * Принимает апдейты с телеграма,
+     * при помощи функционального интерфейса {@link Consumer<Update> updateAction.accept(update)}
+     * передает ссылку на объект Update в блок кода {@link CommandManagerImpl}.
+     */
     @Override
     public void onUpdateReceived(Update update) {
             if (updateAction != null && update != null) {

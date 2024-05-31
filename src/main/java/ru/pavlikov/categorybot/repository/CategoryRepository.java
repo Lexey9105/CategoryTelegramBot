@@ -21,10 +21,8 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
     boolean hasChildren(@Param("category") Category category);
 
     Optional<Category> findCategoryByChatIdAndParentIsNull(Long chatId);
-
-    List<Category> findCategoriesByNameIn(List<String> names);
     List<Category> findCategoriesByParentId(Long parentId);
 
-    void deleteCategoryByNameAndChatId(String name, long ownerId);
+    void deleteCategoryByNameAndChatId(String name, long chatId);
 
 }
