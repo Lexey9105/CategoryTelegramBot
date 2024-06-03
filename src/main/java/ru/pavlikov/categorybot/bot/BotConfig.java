@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+
 /**
  * @author pavlikov
  */
@@ -29,8 +30,6 @@ public class BotConfig {
     public TelegramBotImpl telegramBot() {
         return new TelegramBotImpl(token, userName);
     }
-
-
 
 
 }

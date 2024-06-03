@@ -23,10 +23,10 @@ import static ru.pavlikov.categorybot.constants.Constants.TRANS;
 public class ExcelParser {
 
 
-
     /**
      * Принимает скачанный с апдейта Excel файл, находит в нем дерево категорий и возвращает его списком
-     * @param file скачанный с апдейта Excel файл
+     *
+     * @param file   скачанный с апдейта Excel файл
      * @param chatId id юзера
      * @return {@link List<Category>} с найденными в файле категориями
      * @author pavlikov
@@ -40,7 +40,7 @@ public class ExcelParser {
     }
 
 
-    private List<Category> findNewCategoriesInSheet(  XSSFSheet sheet, long chatId) {
+    private List<Category> findNewCategoriesInSheet(XSSFSheet sheet, long chatId) {
         List<Category> newCategories = new ArrayList<>();
         Map<Integer, Category> categoriesLevels = new HashMap<>();
         AtomicInteger maxLevel = new AtomicInteger(0);

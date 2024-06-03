@@ -30,10 +30,11 @@ public class ExcelBuilder {
 
     /**
      * Собирает дерево категорий в файл Excel
+     *
      * @author pavlikov
      */
-    public void build(Command command)  {
-        Category root=categoryService.findRootCategory(command);
+    public void build(Command command) {
+        Category root = categoryService.findRootCategory(command);
 
         try (XSSFWorkbook workbook = new XSSFWorkbook()) {
             changeWorkBookFont(workbook);
@@ -41,16 +42,16 @@ public class ExcelBuilder {
 
             XSSFSheet sheet = workbook.createSheet("Категории");
 
-            fillSheet(sheet,1,root);
+            fillSheet(sheet, 1, root);
 
             workbook.write(new FileOutputStream(command.getFile()));
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new DocumentDownloadException();
 
         }
     }
 
-    public void fillSheet(XSSFSheet sheet, int level, Category parent){
+    public void fillSheet(XSSFSheet sheet, int level, Category parent) {
         XSSFRow row = sheet.createRow(rowNum++);
         XSSFCell cell = row.createCell(level - 1);
         cell.setCellStyle(descriptorCellStyle);
@@ -58,7 +59,7 @@ public class ExcelBuilder {
         cell = row.createCell(level);
         cell.setCellValue(parent.getName());
         categoryService.findCategoriesByParen(parent).forEach(category -> {
-            fillSheet(sheet,level+1,category);
+            fillSheet(sheet, level + 1, category);
         });
     }
 

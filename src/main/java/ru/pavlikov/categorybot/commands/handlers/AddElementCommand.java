@@ -6,36 +6,30 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.pavlikov.categorybot.model.Command;
 import ru.pavlikov.categorybot.service.impl.CategoryService;
 import ru.pavlikov.categorybot.utils.SendMessageUtils;
+
 /**
  * @author pavlikov
  */
 @Component
 @RequiredArgsConstructor
-public class AddElementCommand  {
+public class AddElementCommand {
 
     private final SendMessageUtils sendMessageUtils;
     private final CategoryService categoryService;
 
     /**
      * Принимает {@link Command} и исполняет команду /addElement
+     *
      * @param command - команда с аргументами
      */
 
-    public void execute(Command command)  {
+    public void execute(Command command) throws TelegramApiException {
         if (command.getChildrenCategory().equals("null")) {
-            try {
-                categoryService.saveRootCategory(command);
-                sendMessageUtils.sendMessage(command.getChatId().toString(), "Корневая категория "+command.getParentCategory()+" успешно добавлена");
-            } catch (TelegramApiException e) {
-                throw new RuntimeException(e);
-            }
+            categoryService.saveRootCategory(command);
+            sendMessageUtils.sendMessage(command.getChatId().toString(), "Корневая категория " + command.getParentCategory() + " успешно добавлена");
         } else {
-            try {
-                categoryService.saveChildrenCategory(command);
-                sendMessageUtils.sendMessage(command.getChatId().toString(), "Дочерняя категория "+command.getChildrenCategory()+" успешно добавлена к "+command.getParentCategory());
-            } catch (TelegramApiException e) {
-                throw new RuntimeException(e);
-            }
+            categoryService.saveChildrenCategory(command);
+            sendMessageUtils.sendMessage(command.getChatId().toString(), "Дочерняя категория " + command.getChildrenCategory() + " успешно добавлена к " + command.getParentCategory());
         }
     }
 }

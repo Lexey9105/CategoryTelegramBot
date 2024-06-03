@@ -7,6 +7,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.pavlikov.categorybot.commands.CommandManagerImpl;
 
 import java.util.function.Consumer;
+
 /**
  * @author pavlikov
  */
@@ -20,6 +21,7 @@ public class TelegramBotImpl extends TelegramLongPollingBot {
         super(new DefaultBotOptions(), token);
         this.username = username;
     }
+
     public void setUpdateAction(Consumer<? super Update> updateHandler) {
         updateAction = updateHandler;
     }
@@ -31,9 +33,9 @@ public class TelegramBotImpl extends TelegramLongPollingBot {
      */
     @Override
     public void onUpdateReceived(Update update) {
-            if (updateAction != null && update != null) {
-                    updateAction.accept(update);
-            }
+        if (updateAction != null && update != null) {
+            updateAction.accept(update);
+        }
     }
 
     @Override

@@ -1,10 +1,11 @@
 package ru.pavlikov.categorybot.exception;
+
 /**
  * @author pavlikov
  */
-public class  CategoryRequestException extends RuntimeException {
+public class CategoryRequestException extends RuntimeException {
 
-    public CategoryRequestException(){
+    public CategoryRequestException() {
         super("Вы отправили некоретную команду");
     }
 }

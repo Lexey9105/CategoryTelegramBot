@@ -12,19 +12,20 @@ import ru.pavlikov.categorybot.utils.SendMessageUtils;
  */
 @Component
 @RequiredArgsConstructor
-public class DownloadCommand  {
+public class DownloadCommand {
 
-   private final SendMessageUtils sendMessageUtils;
+    private final SendMessageUtils sendMessageUtils;
     private final ExcelBuilder excelBuilder;
 
 
     /**
      * Принимает {@link Command} и исполняет команду /download
+     *
      * @param command - команда с аргументами
      */
 
-    public void execute(Command command) throws TelegramApiException {;
+    public void execute(Command command) throws TelegramApiException {
         excelBuilder.build(command);
-        sendMessageUtils.sendFile(command.getChatId().toString(),command.getFile());
+        sendMessageUtils.sendFile(command.getChatId().toString(), command.getFile());
     }
 }

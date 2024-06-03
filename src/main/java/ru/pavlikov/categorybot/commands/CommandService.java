@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
  * команду пользователя и id чата {@link CommandService#addUserCommand(String, Long)},
  * {@link File} переданный с update,команду из вложения к файлу,id чата {@link CommandService#addUserCommand(Update, Long)},
  * Аргументы для работы {@link ru.pavlikov.categorybot.commands.handlers.AddElementCommand} и {@link ru.pavlikov.categorybot.commands.handlers.RemoveElementCommand}
+ *
  * @author pavlikov
  */
 @Component
@@ -33,57 +34,58 @@ public class CommandService {
             "/(addElement|removeElement|removeAll|viewTree|download|upload|help|start)\\s*(<[^>]+>)?\\s*(<[^>]+>)?");
 
 
-    public Command addUserCommand(String input, Long chatId){
+    public Command addUserCommand(String input, Long chatId) {
 
         Matcher matcher = pattern.matcher(input);
-        if(matcher.find()) {
+        if (matcher.find()) {
             String output = matcher.group(1);
-                Command command = new Command();
-                command.setCommand(output);
-                command.setChatId(chatId);
-                command.setMassageText(input);
+            Command command = new Command();
+            command.setCommand(output);
+            command.setChatId(chatId);
+            command.setMassageText(input);
 
-            return command;}
-        else {throw new CategoryRequestException();}
+            return command;
+        } else {
+            throw new CategoryRequestException();
+        }
     }
-    public Command addUserCommand(Update update, Long chatId){
+
+    public Command addUserCommand(Update update, Long chatId) {
         Matcher matcher = pattern.matcher(update.getMessage().getCaption());
-        if(matcher.find()) {
+        if (matcher.find()) {
             String output = matcher.group(1);
-            Command command=new Command();
+            Command command = new Command();
             command.setCommand(output);
             command.setChatId(chatId);
             command.setFile(fileUtils.uploadDocument(update));
-            return command;}
-        else throw new CategoryRequestException();
+            return command;
+        } else throw new CategoryRequestException();
     }
 
-    public Command addParentAndChildren(Command command, String categoriesArguments){
+    public Command addParentAndChildren(Command command, String categoriesArguments) {
         Matcher matcher = pattern.matcher(categoriesArguments);
-        if(matcher.find()) {
-        Optional<String> parentCategory=Optional.ofNullable(matcher.group(2));
-        Optional<String> childrenCategory=Optional.ofNullable(matcher.group(3));
+        if (matcher.find()) {
+            Optional<String> parentCategory = Optional.ofNullable(matcher.group(2));
+            Optional<String> childrenCategory = Optional.ofNullable(matcher.group(3));
 
-        if(parentCategory.isPresent()&&childrenCategory.isPresent()){
-            command.setParentCategory(parentCategory.get());
-            command.setChildrenCategory(childrenCategory.get());
-        } else if(parentCategory.isPresent()) {
-            command.setParentCategory(parentCategory.get());
-            command.setChildrenCategory("null");
-        }
-        }
-        else throw new NoCategoryException();
+            if (parentCategory.isPresent() && childrenCategory.isPresent()) {
+                command.setParentCategory(parentCategory.get());
+                command.setChildrenCategory(childrenCategory.get());
+            } else if (parentCategory.isPresent()) {
+                command.setParentCategory(parentCategory.get());
+                command.setChildrenCategory("null");
+            }
+        } else throw new NoCategoryException();
         return command;
     }
 
     public Command addUserFile(Command command) throws IOException {
-        File file = File.createTempFile("Categories",".xlsx");
+        File file = File.createTempFile("Categories", ".xlsx");
         command.setFile(file);
         return command;
 
 
     }
-
 
 
 }

@@ -30,7 +30,7 @@ public class Category {
     private List<Category> children;
 
 
-    public Category(Category parent,String name, Long chatId) {
+    public Category(Category parent, String name, Long chatId) {
         this.parent = parent;
         this.name = name;
         this.chatId = chatId;

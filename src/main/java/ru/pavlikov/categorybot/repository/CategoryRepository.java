@@ -17,10 +17,12 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
     List<Category> findCategoryByChatId(long chatId);
 
     boolean existsByChatIdAndParentIsNull(Long chatId);
+
     @Query("SELECT CASE WHEN COUNT(c) > 0 THEN true ELSE false END FROM Category c WHERE c.parent = :category")
     boolean hasChildren(@Param("category") Category category);
 
     Optional<Category> findCategoryByChatIdAndParentIsNull(Long chatId);
+
     List<Category> findCategoriesByParentId(Long parentId);
 
     void deleteCategoryByNameAndChatId(String name, long chatId);

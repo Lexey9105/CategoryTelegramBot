@@ -13,7 +13,7 @@ import ru.pavlikov.categorybot.utils.SendMessageUtils;
  */
 @Component
 @RequiredArgsConstructor
-public class UploadCommand  {
+public class UploadCommand {
 
     private final ExcelParser excelParser;
     private final CategoryService categoryService;
@@ -21,12 +21,12 @@ public class UploadCommand  {
 
     /**
      * Принимает {@link Command} и исполняет команду /download
+     *
      * @param command - команда с аргументами
      */
 
     public void execute(Command command) throws TelegramApiException {
-        categoryService.saveAll(command,excelParser.parse(command.getFile(),command.getChatId()));
+        categoryService.saveAll(command, excelParser.parse(command.getFile(), command.getChatId()));
         sendMessageUtils.sendMessage(command.getChatId().toString(), "Категории успешно добавлены");
-
     }
 }
