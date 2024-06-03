@@ -20,7 +20,7 @@ import java.util.Optional;
  */
 @Service
 @RequiredArgsConstructor
-public class CommandManagerImpl implements CommandManager{
+public class CommandManagerImpl {
 
     private final TelegramBotImpl categoryBot;
     private final CommandService commandService;
@@ -55,7 +55,7 @@ public class CommandManagerImpl implements CommandManager{
     }
 
 
-    @Override
+
     public void updateParserAndPerform(Update update) throws TelegramApiException, IOException {
         Long chatId=update.getMessage().getChatId();
         Command command;

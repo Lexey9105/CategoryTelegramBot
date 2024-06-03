@@ -11,7 +11,7 @@ import ru.pavlikov.categorybot.utils.SendMessageUtils;
  */
 @Component
 @RequiredArgsConstructor
-public class ViewTreeCommand implements CommandHandler {
+public class ViewTreeCommand  {
 
     private final SendMessageUtils sendMessageUtils;
     private final CategoryService categoryService;
@@ -20,7 +20,7 @@ public class ViewTreeCommand implements CommandHandler {
      * Принимает {@link Command} и исполняет команду /download
      * @param command - команда с аргументами
      */
-    @Override
+
     public void execute(Command command) throws TelegramApiException {
         try {
             sendMessageUtils.sendMessage(command.getChatId().toString(), categoryService.treeToString(command));

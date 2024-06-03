@@ -11,7 +11,7 @@ import ru.pavlikov.categorybot.utils.SendMessageUtils;
  */
 @Component
 @RequiredArgsConstructor
-public class RemoveElementCommand implements CommandHandler {
+public class RemoveElementCommand  {
 
     private final SendMessageUtils sendMessageUtils;
     private final CategoryService categoryService;
@@ -21,7 +21,7 @@ public class RemoveElementCommand implements CommandHandler {
      * Принимает {@link Command} и исполняет команду /download
      * @param command - команда с аргументами
      */
-    @Override
+
     public void execute(Command command)  {
         try {
             categoryService.removeByNameAndChatId(command);

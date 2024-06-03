@@ -11,7 +11,7 @@ import ru.pavlikov.categorybot.utils.SendMessageUtils;
  */
 @Component
 @RequiredArgsConstructor
-public class AddElementCommand  implements CommandHandler {
+public class AddElementCommand  {
 
     private final SendMessageUtils sendMessageUtils;
     private final CategoryService categoryService;
@@ -20,7 +20,7 @@ public class AddElementCommand  implements CommandHandler {
      * Принимает {@link Command} и исполняет команду /addElement
      * @param command - команда с аргументами
      */
-    @Override
+
     public void execute(Command command)  {
         if (command.getChildrenCategory().equals("null")) {
             try {

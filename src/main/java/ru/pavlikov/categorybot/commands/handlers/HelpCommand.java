@@ -10,7 +10,7 @@ import ru.pavlikov.categorybot.utils.SendMessageUtils;
  */
 @Component
 @RequiredArgsConstructor
-public class HelpCommand implements CommandHandler {
+public class HelpCommand  {
 
     private final SendMessageUtils sendMessageUtils;
     public final static String HELP_MESSAGE =
@@ -44,7 +44,7 @@ public class HelpCommand implements CommandHandler {
      * Принимает {@link Command} и исполняет команду /download
      * @param command - команда с аргументами
      */
-    @Override
+
     public void execute(Command command) throws TelegramApiException {
         try {
             sendMessageUtils.sendMessage(command.getChatId().toString(), HELP_MESSAGE);
